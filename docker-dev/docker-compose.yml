@@ -1,0 +1,18 @@
+services:
+  devbox:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devbox
+    # Root-level kernel capabilities — container has full privileges
+    privileged: true
+    stdin_open: true
+    tty: true
+    # Restart automatically unless explicitly stopped
+    restart: unless-stopped
+    volumes:
+      # Bind-mount: container (root) has full R/W; host user can also modify files freely
+      - /home/shu_ky/docnova:/workspace/docnova
+    working_dir: /workspace/docnova
+    # sleep infinity keeps the container alive without consuming CPU
+    command: sleep infinity
