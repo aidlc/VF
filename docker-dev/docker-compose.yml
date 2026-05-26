@@ -1,9 +1,9 @@
 services:
-  devbox:
+  graphiti:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: devbox
+    container_name: graphiti
     # Root-level kernel capabilities — container has full privileges
     privileged: true
     stdin_open: true
