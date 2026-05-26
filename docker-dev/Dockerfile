@@ -54,6 +54,11 @@ RUN ln -s "$NVM_DIR/versions/node/v24.13.0/bin/node"   /usr/local/bin/node   && 
     ln -s "$NVM_DIR/versions/node/v24.13.0/bin/npm"    /usr/local/bin/npm    && \
     ln -s "$NVM_DIR/versions/node/v24.13.0/bin/npx"    /usr/local/bin/npx
 
+# ── Cursor CLI ───────────────────────────────────────────────
+# ~/.local/bin is already on PATH via the ENV above
+RUN curl -fsS https://cursor.com/install | bash \
+    && agent --version
+
 # ── Shell config ─────────────────────────────────────────────
 COPY .bashrc /root/.bashrc
 
@@ -66,7 +71,8 @@ RUN echo "=== Build verification ===" \
     && python --version \
     && uv --version \
     && node --version \
-    && npm --version
+    && npm --version \
+    && agent --version
 
 # Keep container alive; exec into it with:  docker exec -it <name> bash
 CMD ["bash", "--login", "-c", "sleep infinity"]
